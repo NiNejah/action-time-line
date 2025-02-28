@@ -8,7 +8,7 @@ import { action, COLOR, student } from './type';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Chachout student info';
+  title = 'Chachout Student Activity Visualization Tool';
   showPieCharts = false;
   showTimeline = false;
   students: student[] = [];

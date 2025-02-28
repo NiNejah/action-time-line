@@ -1,6 +1,6 @@
 # Student Activity Visualization Tool
 
-![Screenshot](screenshot.png) <!-- Add a screenshot here if available -->
+![Screenshot](home.png)
 
 An Angular-based visualization tool that analyzes student activity data through interactive timelines and pie charts.
 
