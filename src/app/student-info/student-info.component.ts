@@ -62,7 +62,18 @@ export class StudentInfoComponent implements OnInit {
         }
       },
 
-      chart: { type: 'xrange' },
+      chart: { 
+        type: 'xrange',
+        zooming: {
+          type: 'x',
+          singleTouch: true,
+          resetButton: {
+            theme: {
+              display: 'none'
+            }
+          }
+        }
+      },
       title: { text: `${this.student.name}` },
       xAxis: { type: 'datetime' },
       yAxis: {
@@ -82,6 +93,8 @@ export class StudentInfoComponent implements OnInit {
     return [{
       type: 'xrange',
       pointWidth: 40,
+      borderRadius: 0,  // Remove border radius
+      borderWidth: 0,   // Optional: Remove border
       data: [
         ...this.processActions(this.student?.sansAction, 0),
         ...this.processActions(this.student?.avecAction, 1)
