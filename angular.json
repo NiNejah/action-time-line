@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "action-time-line-2": {
+    "action-time-line": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/action-time-line-2",
+            "outputPath": "dist/action-time-line",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "action-time-line-2:build:production"
+              "buildTarget": "action-time-line:build:production"
             },
             "development": {
-              "buildTarget": "action-time-line-2:build:development"
+              "buildTarget": "action-time-line:build:development"
             }
           },
           "defaultConfiguration": "development"
