@@ -1,27 +1,82 @@
-# ActionTimeLine2
+# Student Activity Visualization Tool
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
+![Screenshot](screenshot.png) <!-- Add a screenshot here if available -->
 
-## Development server
+An Angular-based visualization tool that analyzes student activity data through interactive timelines and pie charts.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- 📊 **Dual Visualization**: View data as both timeline (xrange chart) and pie charts
+- 🎨 **Color-coded Actions**: Consistent color scheme across visualizations
+- 📁 **CSV Import**: Process multiple student files simultaneously
+- 🔍 **Interactive Charts**: Zoomable timeline and detailed tooltips
+- 📱 **Responsive Design**: Works on desktop and mobile devices
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Installation
 
-## Build
+1. **Prerequisites**
+   - Node.js (v14+)
+   - npm (v6+)
+   - Angular CLI (`npm install -g @angular/cli`)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. **Clone Repository**
+    ```bash
+    git clone https://github.com/NiNejah/action-time-line.git
+    cd action-time-line
+    ```
 
-## Running unit tests
+3. **Install Dependencies**
+    ```bash
+    npm install
+    ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+4. **Run Application**
+    ```bash
+    npm start or ng serve --open
+    ```
 
-## Running end-to-end tests
+## Data Preparation
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### CSV Format Requirements
 
-## Further help
+* **File Naming Convention:**
+  * [student-name]-SANS.csv
+  * [student-name]-AVEC.csv 
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+* **File Content:**
+```csv
+temps,description
+00:01:30,Cop-txt-trad
+00:00:45,frappe
+00:00:15,pause
+```
+
+## Usage 
+
+1. **Upload Files**
+   * Click "Choose Files" and select student CSV files
+   *  Files must follow naming convention
+  
+2. **Toggle Views**
+    * Use checkboxes to show/hide:
+      * 🥧 Pie Charts (Time distribution)
+      * ⏳ Timeline (Chronological sequence)
+  
+3. **Interpret Results**
+    * **Timeline:**
+      * X-axis: Time progression
+      * Y-axis: Before/After phases
+      * Colors: Action types
+    * **Pie Charts:**
+      * Left: Before intervention
+      * Right: After intervention
+      * Percentage: Time allocation per action
+
+4. **Interact with Charts**
+    * **Timeline:**
+      * Drag to zoom
+      * Click bars for details
+      * Use reset zoom button
+    * **Pie Charts:**
+      * Hover for time breakdown
+      * Click slices to highlight
