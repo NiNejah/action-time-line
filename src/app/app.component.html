@@ -1,7 +1,16 @@
 
 <h1>{{title}}</h1> 
 <input type="file" multiple (change)="onFileSelected($event)">
+<!-- Color Legend -->
+<div class="color-legend">
+  <div *ngFor="let entry of colorEntries" class="legend-item">
+    <div class="color-box" [style.backgroundColor]="entry.value"></div>
+    <span class="label">{{entry.key}}</span>
+  </div>
+</div>
+
 <div *ngFor="let student of students">
+  <h6>{{student.name}} </h6>
   <app-student-info 
     [student]="student"
   />

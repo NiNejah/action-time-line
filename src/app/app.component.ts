@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CsvParserService } from './services/csv-parser.service.service';
-import { action, student } from './type';
+import { action, COLOR, student } from './type';
 
 
 
@@ -12,6 +12,7 @@ import { action, student } from './type';
 export class AppComponent {
   title = 'Chachout student info';
   students: student[] = [];
+  colorEntries = Object.entries(COLOR).map(([key, value]) => ({ key, value }));
   private studentsMap: { [key: string]: student } = {};
 
   constructor(private csvParser: CsvParserService) {}
@@ -49,7 +50,6 @@ export class AppComponent {
     }
 
     if (type === 'sans') {
-      console.log(filename);
       this.studentsMap[studentName].sansAction = actions;
     } else {
       this.studentsMap[studentName].avecAction = actions;

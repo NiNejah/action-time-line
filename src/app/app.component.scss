@@ -1,6 +1,37 @@
-.file-upload-container { padding: 20px; }
-.upload-section { margin: 20px 0; }
-.file-upload-container { padding: 20px; }
-.upload-section { margin: 20px 0; }
-.student-charts { margin-top: 40px; }
-.chart-container { margin: 40px 0; border-bottom: 1px solid #ccc; padding-bottom: 40px; }
+// app.component.scss
+.color-legend {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    
+    h4 {
+      width: 100%;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+  
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px;
+      background-color: #f8f9fa;
+      border-radius: 4px;
+  
+      .color-box {
+        width: 20px;
+        height: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+      }
+  
+      .label {
+        font-size: 0.9rem;
+        text-transform: capitalize;
+      }
+    }
+}

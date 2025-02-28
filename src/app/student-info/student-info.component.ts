@@ -3,25 +3,13 @@ import * as Highcharts from 'highcharts';
 import XRangeModule from 'highcharts/modules/xrange';
 import ExportingModule from 'highcharts/modules/exporting';
 import OfflineExportingModule from 'highcharts/modules/offline-exporting';
-import { action, student } from '../type';
+
+import { action, COLOR, student } from '../type';
 
 // Proper initialization of Highcharts modules
 XRangeModule(Highcharts);
 ExportingModule(Highcharts);
 OfflineExportingModule(Highcharts);
-
-const COLOR: { [key: string]: string } = {
-  'pause': '#cccccc',
-  'frappe': '#4a86e8',
-  'correction immédiate': '#ff9900',
-  'correction élément précédent': '#f3f346',
-  'deepl': '#cc4125',
-  'cop-cla-trad': '#000000',
-  'cop-trad-txt': '#434343',
-  'cop-txt-trad': '#666666',
-  'clavier': '#0b23a5',
-  'autre': '#ffffff',
-};
 
 @Component({
   selector: 'app-student-info',
@@ -30,7 +18,7 @@ const COLOR: { [key: string]: string } = {
 })
 export class StudentInfoComponent implements OnInit {
   @Input() student!: student;
-
+  
   Highcharts: typeof Highcharts = Highcharts;
 
   chartOptions!: Highcharts.Options;
