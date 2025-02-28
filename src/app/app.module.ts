@@ -6,17 +6,20 @@ import { AppComponent } from './app.component';
 import { StudentInfoComponent } from './student-info/student-info.component';
 
 import { HighchartsChartModule } from 'highcharts-angular';
-
+import { StudentPieChartsComponent } from './student-pie-charts/student-pie-charts.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StudentInfoComponent
+    StudentInfoComponent,
+    StudentPieChartsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration()

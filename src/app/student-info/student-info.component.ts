@@ -62,11 +62,11 @@ export class StudentInfoComponent implements OnInit {
           }
         }
       },
-      title: { text: `${this.student.name}` },
+      title: { text: '' },
       xAxis: { type: 'datetime' },
       yAxis: {
         title: { text: '' }, 
-        categories: ['sans', 'avec'],
+        categories: ['Sans', 'Avec'],
         reversed: true
       },
       series: this.generateXrangeSeries(),
@@ -81,8 +81,8 @@ export class StudentInfoComponent implements OnInit {
     return [{
       type: 'xrange',
       pointWidth: 40,
-      borderRadius: 0,  // Remove border radius
-      borderWidth: 0,   // Optional: Remove border
+      borderRadius: 0,
+      borderWidth: 0,
       data: [
         ...this.processActions(this.student?.sansAction, 0),
         ...this.processActions(this.student?.avecAction, 1)

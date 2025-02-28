@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { CsvParserService } from './services/csv-parser.service.service';
 import { action, COLOR, student } from './type';
 
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,6 +9,8 @@ import { action, COLOR, student } from './type';
 })
 export class AppComponent {
   title = 'Chachout student info';
+  showPieCharts = false;
+  showTimeline = false;
   students: student[] = [];
   colorEntries = Object.entries(COLOR).map(([key, value]) => ({ key, value }));
   private studentsMap: { [key: string]: student } = {};

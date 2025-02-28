@@ -1,17 +1,36 @@
-
-<h1>{{title}}</h1> 
-<input type="file" multiple (change)="onFileSelected($event)">
-<!-- Color Legend -->
-<div class="color-legend">
-  <div *ngFor="let entry of colorEntries" class="legend-item">
-    <div class="color-box" [style.backgroundColor]="entry.value"></div>
-    <span class="label">{{entry.key}}</span>
+<!-- app.component.html -->
+<div class="container">
+  <h1>{{title}}</h1>
+  
+  <div class="options-container">
+    <input type="file" multiple (change)="onFileSelected($event)" class="file-input">
+    
+    <div class="toggle-options">
+      <label class="option-label">
+        <input type="checkbox" [(ngModel)]="showPieCharts"> Pie Charts
+      </label>
+      <label class="option-label">
+        <input type="checkbox" [(ngModel)]="showTimeline"> Timeline
+      </label>
+    </div>
   </div>
-</div>
 
-<div *ngFor="let student of students">
-  <h6>{{student.name}} </h6>
-  <app-student-info 
-    [student]="student"
-  />
+  <div class="color-legend">
+    <div *ngFor="let entry of colorEntries" class="legend-item">
+      <div class="color-box" [style.backgroundColor]="entry.value"></div>
+      <span class="label">{{entry.key}}</span>
+    </div>
+  </div>
+
+  <div *ngFor="let student of students" class="student-card">
+    <h4 class="student-title">{{student.name}}</h4>
+    
+    <div *ngIf="showPieCharts">
+      <app-student-pie-charts [student]="student"></app-student-pie-charts>
+    </div>
+
+    <div *ngIf="showTimeline">
+      <app-student-info [student]="student"></app-student-info>
+    </div>
+  </div>
 </div>

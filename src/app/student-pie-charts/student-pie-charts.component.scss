@@ -1,0 +1,29 @@
+	.pie-charts-container {
+		display: flex;
+		gap: 1rem;
+		margin: 1rem 20rem;
+
+		.pie-chart {
+		background: white;
+		padding: 2rem;
+		border-radius: 8px;
+		box-shadow: 0 .5rem 1rem rgba(0,0,0,0.1);
+		
+		&:first-child {
+			border-right: 2px solid #eee;
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.pie-charts-container {
+			flex-direction: column;
+			
+			.pie-chart {
+				&:first-child {
+						border-right: none;
+						border-bottom: 2px solid #eee;
+				}
+			}
+	}
+}

@@ -1,20 +1,117 @@
-// app.component.scss
-.color-legend {
-    margin: 20px 0;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    
-    h4 {
-      width: 100%;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
+
+$primary-color: #3f51b5;
+$secondary-color: #f5f5f5;
+$border-color: #e0e0e0;
+
+.container {
+  // max-width: 1200px;
+  // margin: 0 auto;
+  padding: 20px;
+}
+
+.options-container {
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+
+  .file-input {
+    margin-bottom: 15px;
+  }
+}
+
+.toggle-options {
+  margin: 0 auto;
+  display: flex;
+  gap: 20px;
   
-    .legend-item {
+  .option-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba($primary-color, 0.1);
+    }
+    
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: $primary-color;
+    }
+  }
+}
+
+.color-legend {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  
+  h4 {
+    width: 100%;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+
+    .color-box {
+      width: 20px;
+      height: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 3px;
+    }
+
+    .label {
+      font-size: 0.9rem;
+      text-transform: capitalize;
+    }
+  }
+
+}
+
+.student-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  // padding: 20px;
+  margin-bottom: 30px;
+  
+  .student-title {
+    color: $primary-color;
+    margin-bottom: 20px;
+    padding: 10px;
+    // padding-bottom: 10px;
+    border-bottom: 2px solid $border-color;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+  
+  .toggle-options {
+    flex-direction: column;
+    gap: 10px;
+  }
+      .legend-item {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -34,4 +131,12 @@
         text-transform: capitalize;
       }
     }
+
+  .student-card {
+    padding: 15px;
+  }
+  
+  .color-legend {
+    padding: 15px;
+  }
 }

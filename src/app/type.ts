@@ -15,9 +15,9 @@ export const COLOR: { [key: string]: string } = {
     'correction immédiate': '#ff9900',
     'correction élément précédent': '#f3f346',
     'deepl': '#cc4125',
-    'cop-cla-trad': '#000000',
-    'cop-trad-txt': '#434343',
-    'cop-txt-trad': '#666666',
+    'Cop-cla-trad': '#000000',
+    'Cop-trad-txt': '#434343',
+    'Cop-txt-trad': '#666666',
     'clavier': '#0b23a5',
     'autre': '#ffffff',
 };
