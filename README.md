@@ -10,7 +10,6 @@ An Angular-based visualization tool that analyzes student activity data through 
 - 🎨 **Color-coded Actions**: Consistent color scheme across visualizations
 - 📁 **CSV Import**: Process multiple student files simultaneously
 - 🔍 **Interactive Charts**: Zoomable timeline and detailed tooltips
-- 📱 **Responsive Design**: Works on desktop and mobile devices
 
 ## Installation
 
