@@ -1,71 +1,121 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import XRangeModule from 'highcharts/modules/xrange';
 import ExportingModule from 'highcharts/modules/exporting';
 import OfflineExportingModule from 'highcharts/modules/offline-exporting';
+import { action, student } from '../type';
 
 // Proper initialization of Highcharts modules
 XRangeModule(Highcharts);
 ExportingModule(Highcharts);
 OfflineExportingModule(Highcharts);
 
+const COLOR: { [key: string]: string } = {
+  'pause': '#cccccc',
+  'frappe': '#4a86e8',
+  'correction immédiate': '#ff9900',
+  'correction élément précédent': '#f3f346',
+  'deepl': '#cc4125',
+  'cop-cla-trad': '#000000',
+  'cop-trad-txt': '#434343',
+  'cop-txt-trad': '#666666',
+  'clavier': '#0b23a5',
+  'autre': '#ffffff',
+};
+
 @Component({
   selector: 'app-student-info',
   templateUrl: './student-info.component.html',
   styleUrl: './student-info.component.scss'
 })
-export class StudentInfoComponent {
+export class StudentInfoComponent implements OnInit {
+  @Input() student!: student;
+
   Highcharts: typeof Highcharts = Highcharts;
-  chartOptions: Highcharts.Options;
+
+  chartOptions!: Highcharts.Options;
+
+  // Base timestamp for the timeline (January 1, 2023 UTC)
+  private baseTimestamp = Date.UTC(2023, 0, 1);
 
   constructor() { 
-    this.chartOptions = {
-      chart: {
-        type: 'xrange'
-      },
-      title: {
-        text: 'Project Timeline'
-      },
-      xAxis: {
-        type: 'datetime'
-      },
-      yAxis: {
-        title: {
-          text: 'Tasks'
-        },
-        categories: ['Design', 'Development', 'Testing', 'Deployment'],
-        reversed: true
-      },
-      series: [{
-        type: 'xrange',
-        name: 'Project Phases',
-        borderRadius: 5,
-        pointWidth: 20,
-        data: [{
-          x: Date.UTC(2023, 0, 1),
-          x2: Date.UTC(2023, 0, 15),
-          y: 0
-        }, {
-          x: Date.UTC(2023, 0, 10),
-          x2: Date.UTC(2023, 1, 1),
-          y: 1
-        }, {
-          x: Date.UTC(2023, 0, 20),
-          x2: Date.UTC(2023, 1, 15),
-          y: 2
-        }, {
-          x: Date.UTC(2023, 1, 1),
-          x2: Date.UTC(2023, 1, 20),
-          y: 3
-        }],
-        dataLabels: {
-          enabled: true,
-          format: '{point.label}'
-        }
-      } as Highcharts.SeriesXrangeOptions]
-    };
   }
 
   ngOnInit(): void {
+    this.updateChart();
+  }
+
+  private updateChart(): void {
+    if (!this.student) return;
+
+    this.chartOptions = {
+      tooltip: {
+        formatter: function() {
+          const point = this.point as any;
+          const durationSeconds = (point.x2 - point.x) / 1000;
+          const minutes = Math.floor(durationSeconds / 60);
+          const seconds = Math.floor(durationSeconds % 60);
+          let durationText = [ minutes, seconds]
+              .map(v => v.toString().padStart(2, '0'))
+              .join(':');
+          return `Action: <b>${point.name}</b><br/>Duration: <b>${durationText}</b>`;
+        }
+      },
+
+      chart: { type: 'xrange' },
+      title: { text: `${this.student.name}` },
+      xAxis: { type: 'datetime' },
+      yAxis: {
+        title: { text: '' }, 
+        categories: ['sans', 'avec'],
+        reversed: true
+      },
+      series: this.generateXrangeSeries(),
+      legend: {
+        enabled: false
+      }
+    };
+  }
+
+
+  private generateXrangeSeries(): Highcharts.SeriesXrangeOptions[] {
+    return [{
+      type: 'xrange',
+      pointWidth: 40,
+      data: [
+        ...this.processActions(this.student?.sansAction, 0),
+        ...this.processActions(this.student?.avecAction, 1)
+        
+      ]
+    }];
+  }
+
+  private processActions(actions: action[], y: number): Highcharts.XrangePointOptionsObject[] {
+    let currentTime = this.baseTimestamp;
+    return actions.map(action => {
+      const start = currentTime;
+      const end = start + action.durationInSecond * 1000;
+      currentTime = end;
+      
+      return {
+        name: action.etiquette,
+        x: start,
+        x2: end,
+        y: y,
+        color: this.getColor(action.etiquette),
+        dataLabels: {
+          enabled: true,
+          format: '',
+          style: {
+            color: '#fff',
+            textOutline: 'none'
+          }
+        }
+      };
+    });
+  }
+
+  private getColor(etiquette: string): string {
+    return COLOR[etiquette] || '#CCCCCC';
   }
 }

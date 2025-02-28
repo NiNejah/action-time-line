@@ -1,2 +1,8 @@
-<h1>Angular Highcharts XRange Demo</h1> 
-<app-student-info></app-student-info>
+
+<h1>{{title}}</h1> 
+<input type="file" multiple (change)="onFileSelected($event)">
+<div *ngFor="let student of students">
+  <app-student-info 
+    [student]="student"
+  />
+</div>
