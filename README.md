@@ -2,11 +2,15 @@
 
 ![Screenshot](home.png)
 
-An Angular-based visualization tool that analyzes student activity data through interactive timelines and pie charts.
+An AI-powered tool for analyzing second language (French) writing patterns with Gemini integration.
 
 ## Features
 
-- 📊 **Dual Visualization**: View data as both timeline (xrange chart) and pie charts
+- 📊 **Multi-Modal Visualization**
+  - Interactive XRange Timeline
+  - Before/After Comparison Charts
+  - AI-Generated Insights
+
 - 🎨 **Color-coded Actions**: Consistent color scheme across visualizations
 - 📁 **CSV Import**: Process multiple student files simultaneously
 - 🔍 **Interactive Charts**: Zoomable timeline and detailed tooltips
@@ -17,13 +21,13 @@ An Angular-based visualization tool that analyzes student activity data through 
    - Node.js (v14+)
    - npm (v6+)
    - Angular CLI (`npm install -g @angular/cli`)
+   - Google Gemini API Key ([Get Key](https://aistudio.google.com/app/apikey))
 
 2. **Clone Repository**
     ```bash
     git clone https://github.com/NiNejah/action-time-line.git
     cd action-time-line
     ```
-
 3. **Install Dependencies**
     ```bash
     npm install
@@ -33,6 +37,18 @@ An Angular-based visualization tool that analyzes student activity data through 
     ```bash
     npm start or ng serve --open
     ```
+
+## Configuration
+
+### Environment Variables
+Google Gemini API Key ([Get Key](https://aistudio.google.com/app/apikey))
+```typescript
+// src/environments/environment.ts
+export const environment = {
+  production: false,
+  GEMINI_API_KEY: 'your_google_api_key_here' // Required for AI features
+};
+```
 
 ## Data Preparation
 
@@ -54,14 +70,23 @@ temps,description
 
 1. **Upload Files**
    * Click "Choose Files" and select student CSV files
-   *  Files must follow naming convention
-  
-2. **Toggle Views**
+   * Files must follow naming convention `studentname-SANS.csv` / `studentname-AVEC.csv`
+2. **Analyze Patterns**
+   - Toggle visualization types
+   - Hover for detailed metrics
+   - Click copy icon 📋 to export insights
+
+3. **AI Features**
+   - Automatic analysis on upload
+   - Refresh with 🔄 button
+   - Error handling with snackbar notifications
+ 
+4. **Toggle Views**
     * Use checkboxes to show/hide:
       * 🥧 Pie Charts (Time distribution)
       * ⏳ Timeline (Chronological sequence)
   
-3. **Interpret Results**
+5. **Interpret Results**
     * **Timeline:**
       * X-axis: Time progression
       * Y-axis: Before/After phases
@@ -71,7 +96,7 @@ temps,description
       * Right: After intervention
       * Percentage: Time allocation per action
 
-4. **Interact with Charts**
+6. **Interact with Charts**
     * **Timeline:**
       * Drag to zoom
       * Click bars for details
