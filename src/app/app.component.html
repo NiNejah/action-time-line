@@ -1,16 +1,16 @@
 <!-- app.component.html -->
 <div class="container">
   <div class="landing">
-    <div class="hero-content">
-      <h1 class="hero-title">{{title}}</h1>
-      <p class="hero-description">
+    <div class="landing__hero-content">
+      <h1 class="landing__hero-content__title">{{title}}</h1>
+      <p class="landing__hero-content__description">
         Transform language learning analysis with AI-powered insights.
         Visualize writing patterns, track progress, and optimize teaching strategies
         through detailed process analytics.
       </p>
 
       <div class="cta-container">
-        <button class="cta-button" (click)="scrollToUpload()">
+        <button class="cta__button" (click)="scrollToUpload()">
           Get Started
           <svg class="arrow-icon" viewBox="0 0 24 24">
             <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
@@ -19,35 +19,35 @@
       </div>
     </div>
 
-    <div class="hero-visual">
+    <div class="landing__visual">
       <div class="gradient-blob"></div>
       <img src="logo.png" alt="Analytics Preview" class="dashboard-preview">
     </div>
   </div>
 
   <div class="setting">
-    <div class="options-container">
-      <h3 class="section-title">Options</h3>
-      <input type="file" multiple (change)="onFileSelected($event)" class="file-input">
+    <div class="settings__options">
+      <h3 class="settings__options__title">Options</h3>
+      <input type="file" multiple (change)="onFileSelected($event)" class="settings__file-input">
 
-      <div class="toggle-options">
-        <label class="option-label">
+      <div class="settings__toggle-options">
+        <label class="settings__toggle-options__label">
           <input type="checkbox" [(ngModel)]="displaySettings.showPie.status"> {{ displaySettings.showPie.lib}}
         </label>
-        <label class="option-label">
+        <label class="settings__toggle-options__label">
           <input type="checkbox" [(ngModel)]="displaySettings.showTimeline.status"> {{displaySettings.showTimeline.lib}}
         </label>
-        <label class="option-label">
+        <label class="settings__toggle-options__label">
           <input type="checkbox" [(ngModel)]="displaySettings.showAnalysis.status"> {{displaySettings.showAnalysis.lib}}
         </label>
       </div>
     </div>
 
-    <div class="color-legend">
+    <div class="legend__container">
       <h3 class="section-title">Legend</h3>
-      <div *ngFor="let entry of colorEntries" class="legend-item">
-        <div class="color-box" [style.backgroundColor]="entry.value"></div>
-        <span class="label">{{entry.key}}</span>
+      <div *ngFor="let entry of colorEntries" class="legend__item">
+        <div class="legend__color-box" [style.backgroundColor]="entry.value"></div>
+        <span class="legend__label">{{entry.key}}</span>
       </div>
     </div>
   </div>
