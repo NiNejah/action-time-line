@@ -1,0 +1,43 @@
+<div class="analysis-container">
+    <h3 (click)="onAnalyze()">AI Analysis for {{student.name}}</h3>
+    
+    <div *ngIf="isLoading" class="loading">
+      <mat-spinner diameter="30"></mat-spinner>
+      Analyzing writing process...
+    </div>
+  
+    <div *ngIf="error" class="error">
+      ⚠️ {{error}}
+    </div>
+  
+    <div *ngIf="analysis" class="results">
+      <div class="metrics">
+        <div class="metric">
+          <div class="value">{{analysis.metrics.efficiency_change}}%</div>
+          <div class="label">Efficiency Change</div>
+        </div>
+        <div class="metric">
+          <div class="value">{{analysis.metrics.accuracy_improvement}}%</div>
+          <div class="label">Accuracy Improvement</div>
+        </div>
+        <div class="metric">
+          <div class="value">{{analysis.metrics.deepl_usage_impact}}%</div>
+          <div class="label">Tool Impact</div>
+        </div>
+      </div>
+  
+      <div class="conclusions">
+        <h4>Key Conclusions</h4>
+        <ul>
+          <li *ngFor="let conclusion of analysis.conclusions">{{conclusion}}</li>
+        </ul>
+      </div>
+  
+      <div class="recommendations">
+        <h4>Pedagogical Recommendations</h4>
+        <ul>
+          <li *ngFor="let rec of analysis.recommendations">{{rec}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
