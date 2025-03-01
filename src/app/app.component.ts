@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CsvParserService } from './services/csv-parser.service.service';
-import { action, COLOR, student } from './type';
+import { action, COLOR, DisplaySettings, student } from './type';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,22 @@ import { action, COLOR, student } from './type';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Chachout Student Activity Visualization Tool';
+  title = 'Student Activity Visualization Tool';
+  displaySettings: DisplaySettings = {
+    showPie: {
+      lib: 'Pie Charts',
+      status: true
+    },
+    showTimeline: {
+      lib: 'Timeline',
+      status: true
+    },
+    showAnalysis: {
+      lib: 'AI analysis',
+      status: false
+    }
+  };
+
   showPieCharts = true;
   showTimeline = true;
   showAIAnalysis = false;
@@ -63,6 +78,17 @@ export class AppComponent {
       reader.onload = (e) => resolve(e.target?.result as string);
       reader.onerror = reject;
       reader.readAsText(file);
+    });
+  }
+
+  // Convert object to array for *ngFor
+  get displaySettingsArray(): DisplaySettings[] {
+    return Object.values(this.displaySettings);
+  }
+
+  scrollToUpload() {
+    document.querySelector('.setting')?.scrollIntoView({
+      behavior: 'smooth'
     });
   }
 }

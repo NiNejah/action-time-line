@@ -31,3 +31,18 @@ export interface AnalysisResult {
     conclusions: string[];
     recommendations: string[];
 }
+
+export interface DisplaySettings {
+    showPie: {
+        lib: string,
+        status:boolean
+    };
+    showTimeline:  {
+        lib: string,
+        status:boolean
+    };
+    showAnalysis:  {
+        lib: string,
+        status:boolean
+    };
+}

@@ -1,0 +1,17 @@
+<div class="student-dashboard">
+    <!-- <h4 class="student-title">{{student.name}}</h4> -->
+
+    <div class="visualizations">
+        <div *ngIf="displaySettings.showPie.status" class="visualization-section">
+            <app-student-pie-charts [student]="student"></app-student-pie-charts>
+        </div>
+
+        <div *ngIf="displaySettings.showTimeline.status" class="visualization-section">
+            <app-student-info [student]="student"></app-student-info>
+        </div>
+
+        <div *ngIf="displaySettings.showAnalysis.status" class="visualization-section">
+            <app-student-analysis [student]="student"></app-student-analysis>
+        </div>
+    </div>
+</div>

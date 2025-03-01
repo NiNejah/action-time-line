@@ -1,0 +1,29 @@
+.student-dashboard {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .student-title {
+    color: #3f51b5;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+  }
+
+  .visualization-controls {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 15px;
+  }
+
+  .visualization-section {
+    margin: 20px 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
+    }
+  }
+}

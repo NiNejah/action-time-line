@@ -1,42 +1,66 @@
 <!-- app.component.html -->
 <div class="container">
-  <h1>{{title}}</h1>
+  <div class="landing">
+    <div class="hero-content">
+      <h1 class="hero-title">{{title}}</h1>
+      <p class="hero-description">
+        Transform language learning analysis with AI-powered insights.
+        Visualize writing patterns, track progress, and optimize teaching strategies
+        through detailed process analytics.
+      </p>
 
-  <div class="options-container">
-    <input type="file" multiple (change)="onFileSelected($event)" class="file-input">
+      <div class="cta-container">
+        <button class="cta-button" (click)="scrollToUpload()">
+          Get Started
+          <svg class="arrow-icon" viewBox="0 0 24 24">
+            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+          </svg>
+        </button>
+      </div>
+    </div>
 
-    <div class="toggle-options">
-      <label class="option-label">
-        <input type="checkbox" [(ngModel)]="showPieCharts"> Pie Charts
-      </label>
-      <label class="option-label">
-        <input type="checkbox" [(ngModel)]="showTimeline"> Timeline
-      </label>
-      <label class="option-label">
-        <input type="checkbox" [(ngModel)]="showAIAnalysis"> AI analysis
-      </label>
+    <div class="hero-visual">
+      <div class="gradient-blob"></div>
+      <img src="logo.png" alt="Analytics Preview" class="dashboard-preview">
     </div>
   </div>
 
-  <div class="color-legend">
-    <div *ngFor="let entry of colorEntries" class="legend-item">
-      <div class="color-box" [style.backgroundColor]="entry.value"></div>
-      <span class="label">{{entry.key}}</span>
+  <div class="setting">
+    <div class="options-container">
+      <h3 class="section-title">Options</h3>
+      <input type="file" multiple (change)="onFileSelected($event)" class="file-input">
+
+      <div class="toggle-options">
+        <label class="option-label">
+          <input type="checkbox" [(ngModel)]="displaySettings.showPie.status"> {{ displaySettings.showPie.lib}}
+        </label>
+        <label class="option-label">
+          <input type="checkbox" [(ngModel)]="displaySettings.showTimeline.status"> {{displaySettings.showTimeline.lib}}
+        </label>
+        <label class="option-label">
+          <input type="checkbox" [(ngModel)]="displaySettings.showAnalysis.status"> {{displaySettings.showAnalysis.lib}}
+        </label>
+      </div>
+    </div>
+
+    <div class="color-legend">
+      <h3 class="section-title">Legend</h3>
+      <div *ngFor="let entry of colorEntries" class="legend-item">
+        <div class="color-box" [style.backgroundColor]="entry.value"></div>
+        <span class="label">{{entry.key}}</span>
+      </div>
     </div>
   </div>
 
-  <div *ngFor="let student of students" class="student-card">     
-    <h4 class="student-title">{{student.name}}</h4>
+  <mat-accordion [multi]="true">
+    <mat-expansion-panel *ngFor="let student of students">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="student-title">
+          <span class="student-name">{{student.name}}</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
 
-    <div *ngIf="showPieCharts">
-      <app-student-pie-charts [student]="student"></app-student-pie-charts>
-    </div>
-
-    <div *ngIf="showTimeline">
-      <app-student-info [student]="student"></app-student-info>
-    </div>
-    <div *ngIf="showAIAnalysis">
-      <app-student-analysis [student]="student"></app-student-analysis>
-    </div>
-  </div>
+      <app-student-dashboard [student]="student" [displaySettings]="displaySettings" />
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,22 +11,24 @@ import { StudentInfoComponent } from './student-info/student-info.component';
 
 import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentPieChartsComponent } from './student-pie-charts/student-pie-charts.component';
-import { FormsModule } from '@angular/forms';
 import { StudentAnalysisComponent } from './student-analysis/student-analysis.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     StudentInfoComponent,
     StudentPieChartsComponent,
-    StudentAnalysisComponent
+    StudentAnalysisComponent,
+    StudentDashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HighchartsChartModule,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatExpansionModule
   ],
   providers: [
     provideClientHydration(),
