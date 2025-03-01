@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { action, AnalysisResult, student } from '../type';
 import { ChatAiService } from '../services/chat-ai.service';
@@ -14,7 +16,11 @@ export class StudentAnalysisComponent implements OnInit {
   isLoading = false;
   error: string | null = null;
 
-  constructor(private chatAiService: ChatAiService) { }
+  constructor(
+    private chatAiService: ChatAiService,
+    private clipboard: Clipboard,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     if (this.analysis === null) {
@@ -85,6 +91,23 @@ export class StudentAnalysisComponent implements OnInit {
       this.error = 'Failed to analyze student data.';
     } finally {
       this.isLoading = false;
+    }
+  }
+
+  copyContent(content: string[]): void {
+    const text = content.join('\n• ');
+    const successful = this.clipboard.copy('• ' + text);
+
+    if (successful) {
+      this.snackBar.open('Copied to clipboard!', 'Dismiss', {
+        duration: 2000,
+        panelClass: 'success-snackbar'
+      });
+    } else {
+      this.snackBar.open('Copy failed!', 'Dismiss', {
+        duration: 2000,
+        panelClass: 'error-snackbar'
+      });
     }
   }
 }

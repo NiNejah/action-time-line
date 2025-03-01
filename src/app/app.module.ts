@@ -13,6 +13,9 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentPieChartsComponent } from './student-pie-charts/student-pie-charts.component';
 import { StudentAnalysisComponent } from './student-analysis/student-analysis.component';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
     HighchartsChartModule,
     FormsModule,
     MatProgressSpinnerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSnackBarModule
   ],
   providers: [
     provideClientHydration(),
