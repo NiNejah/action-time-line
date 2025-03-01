@@ -1,5 +1,11 @@
 <div class="analysis-container">
-  <h3 (click)="onAnalyze()">AI Analysis </h3>
+  <div class="analysis-header">
+    <h3>AI Analysis</h3>
+    <button mat-icon-button class="refresh-button" matTooltip="Refresh analysis" matTooltipPosition="below"
+      (click)="onAnalyze()">
+      <mat-icon>autorenew</mat-icon>
+    </button>
+  </div>
 
   <div *ngIf="isLoading" class="loading">
     <mat-spinner diameter="30"></mat-spinner>
@@ -29,7 +35,8 @@
     <div class="conclusions">
       <div class="section-header">
         <h4>Key Conclusions</h4>
-        <button mat-icon-button class="copy-button" (click)="copyContent(analysis.conclusions)">
+        <button mat-icon-button class="copy-button" matTooltip="Copy the conclusions"
+          (click)="copyContent(analysis.conclusions)">
           <mat-icon>content_copy</mat-icon>
         </button>
       </div>
@@ -41,7 +48,8 @@
     <div class="recommendations">
       <div class="section-header">
         <h4>Pedagogical Recommendations</h4>
-        <button mat-icon-button class="copy-button" (click)="copyContent(analysis.recommendations)">
+        <button mat-icon-button class="copy-button" matTooltip="Copy the recommendations"
+          (click)="copyContent(analysis.recommendations)">
           <mat-icon>content_copy</mat-icon>
         </button>
       </div>
