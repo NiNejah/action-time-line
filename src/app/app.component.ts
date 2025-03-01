@@ -9,13 +9,14 @@ import { action, COLOR, student } from './type';
 })
 export class AppComponent {
   title = 'Chachout Student Activity Visualization Tool';
-  showPieCharts = false;
-  showTimeline = false;
+  showPieCharts = true;
+  showTimeline = true;
+  showAIAnalysis = false;
   students: student[] = [];
   colorEntries = Object.entries(COLOR).map(([key, value]) => ({ key, value }));
   private studentsMap: { [key: string]: student } = {};
 
-  constructor(private csvParser: CsvParserService) {}
+  constructor(private csvParser: CsvParserService) { }
 
   async onFileSelected(event: any) {
     const files = event.target.files;

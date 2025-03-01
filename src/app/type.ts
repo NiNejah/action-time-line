@@ -21,3 +21,13 @@ export const COLOR: { [key: string]: string } = {
     'clavier': '#0b23a5',
     'autre': '#ffffff',
 };
+
+export interface AnalysisResult {
+    metrics: {
+        efficiency_change: number;
+        accuracy_improvement: number;
+        deepl_usage_impact: number;
+    };
+    conclusions: string[];
+    recommendations: string[];
+}
