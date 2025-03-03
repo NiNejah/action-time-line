@@ -21,6 +21,7 @@ import { LandingComponent } from './landing/landing.component';
 import { LegendComponent } from './legend/legend.component';
 import { StudentAccordionComponent } from './student-accordion/student-accordion.component';
 import { SettingsControlComponent } from './settings-control/settings-control.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SettingsControlComponent } from './settings-control/settings-control.co
     LandingComponent,
     LegendComponent,
     StudentAccordionComponent,
-    SettingsControlComponent
+    SettingsControlComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

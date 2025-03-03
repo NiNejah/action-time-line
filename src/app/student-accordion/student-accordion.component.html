@@ -1,12 +1,8 @@
 <div class="student-accordion">
     <!-- TODO add isLoading here  -->
     @if (isLoading) {
-    <div class="loading-overlay">
-        <div class="loading-content">
-            <mat-spinner diameter="40"></mat-spinner>
-            <p>Analyzing student data...</p>
-        </div>
-    </div>
+    <app-loading />
+
     } @else {
     <mat-accordion class="student-accordion-list" [multi]="true">
         <mat-expansion-panel *ngFor="let student of students">
