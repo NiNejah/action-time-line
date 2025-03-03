@@ -1,15 +1,18 @@
+<!-- student-dashboard.component.html -->
 <div class="student-dashboard">
     <div class="visualizations">
-        <div *ngIf="displaySettings.showPie.status" class="visualization-section">
-            <app-student-pie-charts [student]="student"></app-student-pie-charts>
-        </div>
+        <ng-container *ngIf="settings">
+            <div *ngIf="settings.showPie.status" class="visualization-section">
+                <app-student-pie-charts [student]="student"></app-student-pie-charts>
+            </div>
 
-        <div *ngIf="displaySettings.showTimeline.status" class="visualization-section">
-            <app-student-info [student]="student"></app-student-info>
-        </div>
+            <div *ngIf="settings.showTimeline.status" class="visualization-section">
+                <app-student-info [student]="student"></app-student-info>
+            </div>
 
-        <div *ngIf="displaySettings.showAnalysis.status" class="visualization-section">
-            <app-student-analysis [student]="student"></app-student-analysis>
-        </div>
+            <div *ngIf="settings.showAnalysis.status" class="visualization-section">
+                <app-student-analysis [student]="student"></app-student-analysis>
+            </div>
+        </ng-container>
     </div>
 </div>

@@ -1,0 +1,24 @@
+<div class="student-accordion">
+    <!-- TODO add isLoading here  -->
+    @if (isLoading) {
+    <div class="loading-overlay">
+        <div class="loading-content">
+            <mat-spinner diameter="40"></mat-spinner>
+            <p>Analyzing student data...</p>
+        </div>
+    </div>
+    } @else {
+    <mat-accordion class="student-accordion-list" [multi]="true">
+        <mat-expansion-panel *ngFor="let student of students">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="student-title">
+                    <span class="student-name">{{student.name}}</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <app-student-dashboard [student]="student" />
+        </mat-expansion-panel>
+    </mat-accordion>
+    }
+
+</div>

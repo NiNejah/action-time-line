@@ -17,6 +17,10 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { StudentPieChartsComponent } from './student-pie-charts/student-pie-charts.component';
 import { StudentAnalysisComponent } from './student-analysis/student-analysis.component';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
+import { LandingComponent } from './landing/landing.component';
+import { LegendComponent } from './legend/legend.component';
+import { StudentAccordionComponent } from './student-accordion/student-accordion.component';
+import { SettingsControlComponent } from './settings-control/settings-control.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
     StudentInfoComponent,
     StudentPieChartsComponent,
     StudentAnalysisComponent,
-    StudentDashboardComponent
+    StudentDashboardComponent,
+    LandingComponent,
+    LegendComponent,
+    StudentAccordionComponent,
+    SettingsControlComponent
   ],
   imports: [
     BrowserModule,

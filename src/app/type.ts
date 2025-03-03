@@ -1,3 +1,5 @@
+import { Signal } from "@angular/core";
+
 export interface action {
     etiquette: string;
     durationInSecond: number;
@@ -32,17 +34,12 @@ export interface AnalysisResult {
     recommendations: string[];
 }
 
+export interface ShowType {
+    lib: string;
+    status: boolean;
+}
 export interface DisplaySettings {
-    showPie: {
-        lib: string,
-        status:boolean
-    };
-    showTimeline:  {
-        lib: string,
-        status:boolean
-    };
-    showAnalysis:  {
-        lib: string,
-        status:boolean
-    };
+    showPie: ShowType;
+    showTimeline: ShowType;
+    showAnalysis: ShowType;
 }

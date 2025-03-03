@@ -1,0 +1,16 @@
+<!-- settings-control.component.html -->
+<div class="setting-control">
+    <div class="settings__options">
+        <h3 class="settings__options__title">Options</h3>
+        <input type="file" multiple (change)="onFileSelected($event)" class="settings__file-input">
+
+        <div class="settings__toggle-options">
+            @for (key of settingsKeys; track $index) {
+            <label class="settings__toggle-options__label">
+                <input type="checkbox" [checked]="settings?.[key]?.status" (change)="updateSetting(key, $event )">
+                {{ settings?.[key]?.lib }}
+            </label>
+            }
+        </div>
+    </div>
+</div>

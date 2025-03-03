@@ -1,0 +1,7 @@
+<div class="legend__container">
+    <h3 class="section-title">Legend</h3>
+    <div *ngFor="let entry of colorEntries" class="legend__item">
+        <div class="legend__color-box" [style.backgroundColor]="entry.value"></div>
+        <span class="legend__label">{{entry.key}}</span>
+    </div>
+</div>

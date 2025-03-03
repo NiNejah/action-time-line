@@ -1,0 +1,161 @@
+@import "../../styles.scss";
+
+.landing {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+
+  &__hero-content {
+    padding: 4rem 2rem;
+    margin: 0 4rem;
+    flex: 1;
+    max-width: 60rem;
+    z-index: 2;
+
+    &__title {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      background: $primary-gradient;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+      font-family: "Poppins", sans-serif;
+      text-shadow: 0 4px 1rem rgba(0, 0, 0, 0.1);
+    }
+
+    &__description {
+      font-size: 1.25rem;
+      color: $text-dark;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+      max-width: 50rem;
+      opacity: 0.9;
+    }
+  }
+
+  &__visual {
+    flex: 1;
+    position: relative;
+    height: 60rem;
+  }
+}
+
+.cta {
+  &__container {
+    position: relative;
+    display: inline-block;
+  }
+
+  &__button {
+    background: $primary-gradient;
+    color: $text-light;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 8px 20px rgba(63, 81, 181, 0.3);
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(63, 81, 181, 0.4);
+
+      .arrow-icon {
+        transform: translateX(3px);
+      }
+    }
+  }
+
+  &__icon {
+    width: 2.4rem;
+    height: 2.4rem;
+    fill: currentColor;
+    transition: transform $transition-timing;
+  }
+}
+
+// Dashboard Preview
+.dashboard-preview {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  width: 30rem;
+  opacity: 0.8;
+  transform: translateY(-50%);
+  transition: transform $transition-timing;
+
+  &:hover {
+    transform: translateY(-50%) scale(1.02);
+  }
+}
+
+// Gradient Blob Effect
+.gradient-blob {
+  position: absolute;
+  width: 80rem;
+  height: 80rem;
+  background: $secondary-gradient;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  filter: blur(8rem);
+  opacity: 0.15;
+  right: -20rem;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: float 12s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(-50%) rotate(0);
+  }
+  33% {
+    transform: translateY(-55%) rotate(3deg);
+  }
+  66% {
+    transform: translateY(-45%) rotate(-3deg);
+  }
+}
+
+@media (max-width: 1200px) {
+  .landing {
+    flex-direction: column;
+    text-align: center;
+    padding: 6rem 2rem;
+
+    &__hero-content {
+      max-width: 100%;
+      margin-bottom: 4rem;
+    }
+
+    &__title {
+      font-size: 3rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .landing {
+    &__title {
+      font-size: 2.5rem;
+    }
+    &__description {
+      font-size: 1.1rem;
+    }
+    &__visual {
+      .dashboard-preview {
+        width: 15rem;
+        right: 0;
+        top: 0;
+      }
+    }
+  }
+}
