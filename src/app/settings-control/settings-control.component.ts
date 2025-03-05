@@ -28,6 +28,9 @@ export class SettingsControlComponent implements OnInit, OnDestroy {
       .subscribe(settings => {
         this.settings = settings;
       });
+
+    const savedStudents = this.analysisService.loadStudentsOrder();
+    this.loadStudentsInMap(savedStudents);
   }
 
   ngOnDestroy(): void {
@@ -38,7 +41,10 @@ export class SettingsControlComponent implements OnInit, OnDestroy {
   async onFileSelected(event: any) {
     this.analysisService.setLoading(true);
     const files = event.target.files;
-    this.studentsMap = {};
+
+    this.analysisService.students$.subscribe((students) => {
+      this.loadStudentsInMap(students);
+    });
 
     for (const file of files) {
       try {
@@ -92,5 +98,13 @@ export class SettingsControlComponent implements OnInit, OnDestroy {
       reader.onerror = reject;
       reader.readAsText(file);
     });
+  }
+
+  private loadStudentsInMap(students: student[] | null): void {
+    if (students) {
+      students.forEach((s) => {
+        this.studentsMap[s.name] = s;
+      });
+    }
   }
 }
