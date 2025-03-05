@@ -6,6 +6,16 @@
     border-radius: 1.2rem;
     box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.06);
     max-width: 60vw;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &__items {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
     gap: 0.8rem;
@@ -14,11 +24,25 @@
   &__item {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.5rem;
     padding: 0.5rem;
-    border-radius: 0.8rem;
-    transition: all $transition-timing;
-    background: rgba($primary-color, 0.03);
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .remove-btn {
+      margin-left: auto;
+      opacity: 0.5;
+
+      &:hover {
+        opacity: 1;
+        color: #ff0000;
+      }
+    }
   }
 
   &__color-box {
@@ -39,5 +63,56 @@
 @media (max-width: 768px) {
   .legend {
     max-width: 90vw;
+  }
+}
+
+.add-form {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  max-width: 10vw;
+  &__inputs {
+    display: flex;
+    gap: 0.5rem;
+    flex-grow: 1;
+    align-items: center;
+  }
+
+  .color-input {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+
+    input[type="color"] {
+      width: 100%;
+      height: 100%;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      &::-webkit-color-swatch {
+        border: none;
+        border-radius: 6px;
+      }
+    }
+  }
+
+  mat-form-field {
+    flex-grow: 1;
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+
+    .mat-form-field-infix {
+      border-top: 0;
+      padding: 0.5em 0;
+    }
+  }
+
+  button {
+    margin-left: auto;
+    height: 40px;
   }
 }
