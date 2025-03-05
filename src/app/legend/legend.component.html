@@ -1,7 +1,31 @@
+<!-- legend.component.html -->
 <div class="legend__container">
-    <h3 class="section-title">Legend</h3>
-    <div *ngFor="let entry of colorEntries" class="legend__item">
-        <div class="legend__color-box" [style.backgroundColor]="entry.value"></div>
-        <span class="legend__label">{{entry.key}}</span>
+    <div class="legend__header">
+        <h3 class="section-title">Legend</h3>
+        <button mat-icon-button (click)="toggleForm()">
+            <mat-icon>{{ showAddForm ? 'close' : 'add' }}</mat-icon>
+        </button>
+    </div>
+
+    <form *ngIf="showAddForm" (submit)="addItem()" class="add-form" [formGroup]="form">
+        <mat-form-field>
+            <input matInput placeholder="Label" formControlName="key">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput type="color" formControlName="color">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">Add</button>
+    </form>
+
+    <div class="legend__items">
+        <div *ngFor="let entry of legendItems" class="legend__item">
+            <div class="legend__color-box" [style.backgroundColor]="entry.color"></div>
+            <span class="legend__label">{{ entry.key }}</span>
+            <button mat-icon-button (click)="removeItem(entry.key)" class="remove-btn">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
     </div>
 </div>

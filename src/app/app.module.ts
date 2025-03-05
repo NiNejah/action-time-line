@@ -8,6 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +25,8 @@ import { LegendComponent } from './legend/legend.component';
 import { StudentAccordionComponent } from './student-accordion/student-accordion.component';
 import { SettingsControlComponent } from './settings-control/settings-control.component';
 import { LoadingComponent } from './loading/loading.component';
+
+
 
 @NgModule({
   declarations: [
@@ -46,7 +51,10 @@ import { LoadingComponent } from './loading/loading.component';
     MatIconModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(),

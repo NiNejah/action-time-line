@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
-import { COLOR, student } from '../type';
+import { COLOR, LegendItem, student } from '../type';
+import { LegendService } from '../services/legend.service';
+import { Subject, takeUntil } from 'rxjs';
 
 
 @Component({
@@ -8,16 +10,32 @@ import { COLOR, student } from '../type';
   templateUrl: './student-pie-charts.component.html',
   styleUrls: ['./student-pie-charts.component.scss']
 })
-export class StudentPieChartsComponent {
+export class StudentPieChartsComponent implements OnInit, OnDestroy {
   @Input() student!: student;
-  
+
   Highcharts: typeof Highcharts = Highcharts;
   chartOptionsBefore: Highcharts.Options;
   chartOptionsAfter: Highcharts.Options;
+  legendItems!: LegendItem[];
+  private destroy$ = new Subject<void>();
 
-  constructor() {
+  constructor(private legendService: LegendService) {
     this.chartOptionsBefore = this.getPieChartOptions('Sans Actions');
     this.chartOptionsAfter = this.getPieChartOptions('Avec Actions');
+  }
+
+  ngOnInit(): void {
+    this.legendService.legendItems$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(items => {
+        this.legendItems = items;
+        this.updateCharts();
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngOnChanges() {
@@ -51,7 +69,7 @@ export class StudentPieChartsComponent {
     return Object.entries(aggregated).map(([name, y]) => ({
       name,
       y: y as number,
-      color: COLOR[name] || '#CCCCCC'
+      color: this.getColor(name)
     }));
   }
 
@@ -60,7 +78,7 @@ export class StudentPieChartsComponent {
       chart: { type: 'pie' },
       title: { text: title },
       tooltip: {
-        formatter: function() {
+        formatter: function () {
           const totalSeconds = this.y || 0;
           const hours = Math.floor(totalSeconds / 3600);
           const minutes = Math.floor((totalSeconds % 3600) / 60);
@@ -83,5 +101,9 @@ export class StudentPieChartsComponent {
         }
       }
     };
+  }
+
+  getColor(etiquette: string): string {
+    return this.legendItems?.find(item => item.key === etiquette)?.color || '#CCCCCC';
   }
 }

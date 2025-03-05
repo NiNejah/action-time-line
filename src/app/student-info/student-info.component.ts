@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import XRangeModule from 'highcharts/modules/xrange';
 import ExportingModule from 'highcharts/modules/exporting';
 import OfflineExportingModule from 'highcharts/modules/offline-exporting';
 
-import { action, COLOR, student } from '../type';
+import { action, LegendItem, student } from '../type';
+import { Subject, takeUntil } from 'rxjs';
+import { LegendService } from '../services/legend.service';
 
 // Proper initialization of Highcharts modules
 XRangeModule(Highcharts);
@@ -16,41 +18,59 @@ OfflineExportingModule(Highcharts);
   templateUrl: './student-info.component.html',
   styleUrl: './student-info.component.scss'
 })
-export class StudentInfoComponent implements OnInit {
+export class StudentInfoComponent implements OnInit, OnDestroy {
   @Input() student!: student;
-  
-  Highcharts: typeof Highcharts = Highcharts;
+
 
   chartOptions!: Highcharts.Options;
+  legendItems!: LegendItem[];
+  private destroy$ = new Subject<void>();
 
   // Base timestamp for the timeline (January 1, 2023 UTC)
   private baseTimestamp = Date.UTC(2023, 0, 1);
+  Highcharts: typeof Highcharts = Highcharts;
 
-  constructor() { 
+  constructor(private legendService: LegendService) {
   }
 
   ngOnInit(): void {
+    this.legendService.legendItems$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(items => {
+        this.legendItems = items;
+        this.updateChart();
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  ngOnChanges() {
     this.updateChart();
   }
 
   private updateChart(): void {
+    console.log("===========================================");
+
     if (!this.student) return;
 
     this.chartOptions = {
       tooltip: {
-        formatter: function() {
+        formatter: function () {
           const point = this.point as any;
           const durationSeconds = (point.x2 - point.x) / 1000;
           const minutes = Math.floor(durationSeconds / 60);
           const seconds = Math.floor(durationSeconds % 60);
-          let durationText = [ minutes, seconds]
-              .map(v => v.toString().padStart(2, '0'))
-              .join(':');
+          let durationText = [minutes, seconds]
+            .map(v => v.toString().padStart(2, '0'))
+            .join(':');
           return `Action: <b>${point.name}</b><br/>Duration: <b>${durationText}</b>`;
         }
       },
 
-      chart: { 
+      chart: {
         type: 'xrange',
         zooming: {
           type: 'x',
@@ -65,7 +85,7 @@ export class StudentInfoComponent implements OnInit {
       title: { text: '' },
       xAxis: { type: 'datetime' },
       yAxis: {
-        title: { text: '' }, 
+        title: { text: '' },
         categories: ['Sans', 'Avec'],
         reversed: true
       },
@@ -86,7 +106,7 @@ export class StudentInfoComponent implements OnInit {
       data: [
         ...this.processActions(this.student?.sansAction, 0),
         ...this.processActions(this.student?.avecAction, 1)
-        
+
       ]
     }];
   }
@@ -97,7 +117,7 @@ export class StudentInfoComponent implements OnInit {
       const start = currentTime;
       const end = start + action.durationInSecond * 1000;
       currentTime = end;
-      
+
       return {
         name: action.etiquette,
         x: start,
@@ -116,7 +136,7 @@ export class StudentInfoComponent implements OnInit {
     });
   }
 
-  private getColor(etiquette: string): string {
-    return COLOR[etiquette] || '#CCCCCC';
+  getColor(etiquette: string): string {
+    return this.legendItems?.find(item => item.key === etiquette)?.color || '#CCCCCC';
   }
 }
