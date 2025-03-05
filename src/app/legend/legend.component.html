@@ -26,7 +26,7 @@
         <div *ngFor="let entry of legendItems" class="legend__item">
             <div class="legend__color-box" [style.backgroundColor]="entry.color"></div>
             <span class="legend__label">{{ entry.key }}</span>
-            <button mat-icon-button (click)="removeItem(entry.key)" class="remove-btn">
+            <button mat-icon-button (click)="removeItem(entry.key)" class="remove-btn" matTooltip="Remove label">
                 <mat-icon>close</mat-icon>
             </button>
         </div>

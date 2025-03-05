@@ -13,8 +13,6 @@ export class AnalysisService {
   });
   loadingSubject = new BehaviorSubject<boolean>(false);
 
-
-
   students$: Observable<student[]> = this.studentsSubject.asObservable();
   settings$: Observable<DisplaySettings> = this.settingsSubject.asObservable();
   loading$ = this.loadingSubject.asObservable();
@@ -29,5 +27,39 @@ export class AnalysisService {
 
   setLoading(state: boolean): void {
     this.loadingSubject.next(state);
+  }
+
+
+  updateStudentsOrder(students: student[]): void {
+    // Update local state
+    this.studentsSubject.next(students);
+
+    // Persist to localStorage
+    this.saveStudentsOrder(students);
+  }
+
+  private saveStudentsOrder(students: student[]): void {
+    try {
+      localStorage.setItem('studentsOrder', JSON.stringify(students));
+    } catch (error) {
+      console.error('Failed to save students order:', error);
+    }
+  }
+
+  loadStudentsOrder(): student[] | null {
+    try {
+      const order = localStorage.getItem('studentsOrder');
+      return order ? JSON.parse(order) : null;
+    } catch (error) {
+      console.error('Failed to load students order:', error);
+      return null;
+    }
+  }
+
+  removeStudent(studentName: string) {
+    const currentStudents = this.studentsSubject.value;
+    const updatedStudents = currentStudents.filter(s => s.name !== studentName);
+    this.updateStudents(updatedStudents);
+    this.updateStudentsOrder(updatedStudents);
   }
 }

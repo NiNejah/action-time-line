@@ -1,17 +1,27 @@
+<!-- student-accordion.component.html -->
 <div class="student-accordion">
     @if (isLoading) {
     <app-loading />
     } @else {
-    <mat-accordion class="student-accordion-list" [multi]="true">
-        <mat-expansion-panel *ngFor="let student of students">
+    <mat-accordion class="student-accordion-list" [multi]="true" cdkDropList (cdkDropListDropped)="onDrop($event)">
+        @for (student of students; track student.name; let i = $index) {
+        <mat-expansion-panel cdkDrag [cdkDragData]="student" hideToggle>
             <mat-expansion-panel-header>
                 <mat-panel-title class="student-title">
-                    <span class="student-name">{{student.name}}</span>
+                    <span class="student-name">
+                        <mat-icon class="drag-handle" cdkDragHandle>drag_indicator</mat-icon>
+                        {{student.name}}
+                    </span>
                 </mat-panel-title>
+                <button mat-icon-button class="remove-btn" (click)="removeStudent(student.name, $event)"
+                    matTooltip="Remove student">
+                    <mat-icon>close</mat-icon>
+                </button>
             </mat-expansion-panel-header>
 
             <app-student-dashboard [student]="student" />
-        </mat-expansion-panel> 
+        </mat-expansion-panel>
+        }
     </mat-accordion>
     }
 </div>

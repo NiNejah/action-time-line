@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Subject, takeUntil } from 'rxjs';
 
 import { student } from '../type';
@@ -24,16 +24,34 @@ export class StudentAccordionComponent implements OnInit, OnDestroy {
         this.isLoading = loading;
       });
 
+    const savedOrder = this.analysisService.loadStudentsOrder();
+    if (savedOrder?.length) {
+      this.students = savedOrder;
+    }
+
+    // Subscribe to updates
     this.analysisService.students$
       .pipe(takeUntil(this.destroy$))
       .subscribe(students => {
-        this.students = students;
-        this.isLoading = false;
+        if (!savedOrder?.length) {
+          this.students = students;
+        }
       });
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  onDrop(event: CdkDragDrop<student[]>) {
+    moveItemInArray(this.students, event.previousIndex, event.currentIndex);
+    // Update your service to persist the order
+    this.analysisService.updateStudentsOrder([...this.students]);
+  }
+
+  removeStudent(studentName: string, event: MouseEvent) {
+    event.stopPropagation(); // Prevent panel expansion when clicking remove
+    this.analysisService.removeStudent(studentName)
   }
 }

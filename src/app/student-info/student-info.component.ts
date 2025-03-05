@@ -52,7 +52,6 @@ export class StudentInfoComponent implements OnInit, OnDestroy {
   }
 
   private updateChart(): void {
-    console.log("===========================================");
 
     if (!this.student) return;
 

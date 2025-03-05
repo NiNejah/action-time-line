@@ -25,7 +25,7 @@ import { LegendComponent } from './legend/legend.component';
 import { StudentAccordionComponent } from './student-accordion/student-accordion.component';
 import { SettingsControlComponent } from './settings-control/settings-control.component';
 import { LoadingComponent } from './loading/loading.component';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -54,7 +54,8 @@ import { LoadingComponent } from './loading/loading.component';
     MatTooltipModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DragDropModule
   ],
   providers: [
     provideClientHydration(),
