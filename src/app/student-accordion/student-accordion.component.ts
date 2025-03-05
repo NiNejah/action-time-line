@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -15,7 +15,10 @@ export class StudentAccordionComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   isLoading = false;
 
-  constructor(private analysisService: AnalysisService) { }
+  constructor(
+    private analysisService: AnalysisService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
     this.analysisService.loading$
@@ -25,17 +28,17 @@ export class StudentAccordionComponent implements OnInit, OnDestroy {
       });
 
     const savedOrder = this.analysisService.loadStudentsOrder();
+
     if (savedOrder?.length) {
       this.students = savedOrder;
+      this.analysisService.updateStudentsOrder(savedOrder)
     }
 
     // Subscribe to updates
     this.analysisService.students$
       .pipe(takeUntil(this.destroy$))
       .subscribe(students => {
-        if (!savedOrder?.length) {
-          this.students = students;
-        }
+        this.students = students;
       });
   }
 

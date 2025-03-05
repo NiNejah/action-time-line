@@ -50,7 +50,7 @@ export class SettingsControlComponent implements OnInit, OnDestroy {
       }
     }
     this.analysisService.setLoading(false);
-    this.analysisService.updateStudents(Object.values(this.studentsMap));
+    this.analysisService.updateStudentsOrder(Object.values(this.studentsMap));
   }
 
   updateSetting(key: keyof DisplaySettings, event: Event): void {

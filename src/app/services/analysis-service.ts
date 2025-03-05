@@ -57,9 +57,7 @@ export class AnalysisService {
   }
 
   removeStudent(studentName: string) {
-    const currentStudents = this.studentsSubject.value;
-    const updatedStudents = currentStudents.filter(s => s.name !== studentName);
-    this.updateStudents(updatedStudents);
+    const updatedStudents = this.studentsSubject.value.filter(s => s.name !== studentName);
     this.updateStudentsOrder(updatedStudents);
   }
 }
