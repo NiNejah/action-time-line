@@ -35,7 +35,6 @@ export class SettingsControlComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-
   async onFileSelected(event: any) {
     this.analysisService.setLoading(true);
     const files = event.target.files;

@@ -1,8 +1,6 @@
 <div class="student-accordion">
-    <!-- TODO add isLoading here  -->
     @if (isLoading) {
     <app-loading />
-
     } @else {
     <mat-accordion class="student-accordion-list" [multi]="true">
         <mat-expansion-panel *ngFor="let student of students">
@@ -13,8 +11,7 @@
             </mat-expansion-panel-header>
 
             <app-student-dashboard [student]="student" />
-        </mat-expansion-panel>
+        </mat-expansion-panel> 
     </mat-accordion>
     }
-
 </div>

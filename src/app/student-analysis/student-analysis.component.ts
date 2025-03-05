@@ -53,10 +53,10 @@ export class StudentAnalysisComponent implements OnInit {
   }
   
   Data Context:
-  [BEFORE DEEPL]
+  [WIOUT DEEPL]
   ${beforeData}
   
-  [AFTER DEEPL]
+  [WITH DEEPL]
   ${afterData}
   
   Analysis Requirements:

@@ -1,4 +1,4 @@
-# Student Activity Visualization Tool
+# [Student Activity Visualization Tool](https://sav-tool.web.app/)
 
 ![Screenshot](home.png)
 

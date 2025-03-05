@@ -149,37 +149,3 @@
     transform: scaleY(1.4);
   }
 }
-
-// Dark mode support
-@media (prefers-color-scheme: dark) {
-  .data-loader {
-    .grid {
-      stroke: rgba(255, 255, 255, 0.1);
-    }
-    .data-point {
-      fill: lighten($primary-color, 20%);
-    }
-    .data-line {
-      stroke: lighten($primary-color, 20%);
-    }
-    .chart-bar {
-      fill: rgba(255, 255, 255, 0.1);
-    }
-  }
-}
-
-// // Dark mode support
-// @media (prefers-color-scheme: dark) {
-//   .loading-overlay {
-//     background: rgba(0, 0, 0, 0.9);
-
-//     .loading-content {
-//       background: linear-gradient(145deg, #2c2c2c, #1f1f1f);
-//       border-color: rgba(255, 255, 255, 0.1);
-
-//       p {
-//         color: rgba(255, 255, 255, 0.9);
-//       }
-//     }
-//   }
-// }
